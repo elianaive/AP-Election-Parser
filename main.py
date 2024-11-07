@@ -58,7 +58,7 @@ def main():
                             race.race_id,
                             county_results,
                             metadata[race.race_id]['candidates'],
-                            timestamp,  # Use the same timestamp for all races
+                            timestamp,
                             args.data_dir
                         )
                 print(f"Completed {race_type} data collection")

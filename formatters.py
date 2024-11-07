@@ -219,7 +219,7 @@ class CSVFormatter:
             writer = csv.DictWriter(f, fieldnames=headers)
             writer.writeheader()
             writer.writerows(rows)
-        #print(f"Wrote {len(rows)} rows to {filename}")
+        print(f"Wrote {len(rows)} rows to {filename}")
 
 class DetailedFormatter:
     """Formatter for detailed county-level results."""
