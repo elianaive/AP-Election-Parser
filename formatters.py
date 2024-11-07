@@ -243,11 +243,12 @@ class DetailedFormatter:
                              county_results: List[CountyResult],
                              candidate_meta: dict, timestamp: datetime, data_dir: str = "data") -> None:
         """Write detailed results to CSV."""
-        person_rows = []
-        ballot_rows = []
+        os.makedirs(data_dir, exist_ok=True)
+        filename = os.path.join(data_dir, f'{race_type}_{timestamp}_detailed.csv')
         
+        # Prepare rows for writing
+        rows = []
         for county_result in county_results:
-            # Create base row with county info
             base_row = {
                 'race_id': race_id,
                 'state_postal': county_result.state_postal,
@@ -263,45 +264,41 @@ class DetailedFormatter:
                 'last_updated': county_result.last_updated.isoformat()
             }
             
-            # Add a row for each candidate
             for cand_id, vote_data in county_result.candidate_votes.items():
-                row = base_row.copy()
                 if cand_id in candidate_meta:
+                    row = base_row.copy()
                     cand = candidate_meta[cand_id]
-                    if 'first' in cand:  # Person candidate
+                    
+                    if race_type == 'ballot':
                         row.update({
                             'candidate_id': cand_id,
-                            'first_name': cand['first'],
-                            'last_name': cand['last'],
-                            'party': cand['party'],
+                            'option_name': cand.get('last', ''),
                             'vote_count': vote_data['votes'],
                             'vote_pct': vote_data['pct']
                         })
-                        person_rows.append(row)
-                    else:  # Ballot option
+                        rows.append(row)
+                    else:
                         row.update({
                             'candidate_id': cand_id,
-                            'option_name': cand['last'],
+                            'first_name': cand.get('first', ''),
+                            'last_name': cand.get('last', ''),
+                            'party': cand.get('party', ''),
                             'vote_count': vote_data['votes'],
                             'vote_pct': vote_data['pct']
                         })
-                        ballot_rows.append(row)
+                        rows.append(row)
 
-        # Write the appropriate type of rows
-        if race_type == 'ballot':
-            if ballot_rows:
-                filename = os.path.join(data_dir, f'{race_type}_{timestamp}_detailed.csv')
-                cls.write_csv(filename, cls.BALLOT_HEADERS, ballot_rows)
-        else:
-            if person_rows:
-                filename = os.path.join(data_dir, f'{race_type}_{timestamp}_detailed.csv')
-                cls.write_csv(filename, cls.PERSON_RACE_HEADERS, person_rows)
+        # Determine which headers to use
+        headers = cls.BALLOT_HEADERS if race_type == 'ballot' else cls.PERSON_RACE_HEADERS
 
-    @staticmethod
-    def write_csv(filename: str, headers: List[str], rows: List[dict]) -> None:
-        """Write data to CSV file."""
-        with open(filename, 'w', newline='', encoding='utf-8') as f:
+        # Write or append to file
+        file_exists = os.path.exists(filename)
+        mode = 'a' if file_exists else 'w'
+        
+        with open(filename, mode, newline='', encoding='utf-8') as f:
             writer = csv.DictWriter(f, fieldnames=headers)
-            writer.writeheader()
+            if not file_exists:
+                writer.writeheader()
+                print(f"Created new file: {filename}")
             writer.writerows(rows)
-        #print(f"Wrote {len(rows)} detailed results to {filename}")
+            print(f"{'Appended' if file_exists else 'Wrote'} {len(rows)} rows for race {race_id} to {filename}")

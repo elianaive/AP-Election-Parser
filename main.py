@@ -28,6 +28,7 @@ def main():
    
     # Save to CSV files if requested
     if args.save:
+        # Generate timestamp once for the entire run
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         print(f"\nSaving results to {args.data_dir}/")
         CSVFormatter.write_results(categorized_races, timestamp, args.data_dir)
@@ -38,30 +39,28 @@ def main():
        
         # Get detailed data for relevant race types
         race_types = [
-            ('president', categorized_races.get('Presidential', [])),
-            ('senate', categorized_races.get('Senate', [])),
+            ('governor', categorized_races.get('Governor', [])),
             ('ballot', categorized_races.get('Ballot Measures', []))
         ]
 
-        for i, (race_type, races) in enumerate(race_types):
+        # Process each race type
+        for race_type, races in race_types:
             if races:
-                with tqdm(races, desc=f"Fetching {race_type} county data", 
-                         position=0, leave=True) as pbar:
-                    for race in pbar:
-                        pbar.set_postfix_str(f"Processing {race.state_postal}")
-                        county_results = detailed_parser.get_detailed_results(
+                print(f"\nProcessing {race_type} races...")
+                for race in tqdm(races, desc=f"Fetching {race_type} county data"):
+                    county_results = detailed_parser.get_detailed_results(
+                        race.race_id,
+                        race.state_postal
+                    )
+                    if county_results:
+                        DetailedFormatter.write_detailed_results(
+                            race_type,
                             race.race_id,
-                            race.state_postal
+                            county_results,
+                            metadata[race.race_id]['candidates'],
+                            timestamp,  # Use the same timestamp for all races
+                            args.data_dir
                         )
-                        if county_results:
-                            DetailedFormatter.write_detailed_results(
-                                race_type,
-                                race.race_id,
-                                county_results,
-                                metadata[race.race_id]['candidates'],
-                                timestamp,
-                                args.data_dir
-                            )
                 print(f"Completed {race_type} data collection")
 
 if __name__ == "__main__":
