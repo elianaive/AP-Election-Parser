@@ -2,7 +2,7 @@ from typing import Union, Dict, List, Optional, TextIO
 import csv
 import os
 from datetime import datetime
-from models import ElectionRace, BallotMeasure, PersonCandidate, BallotOptionCandidate
+from models import ElectionRace, BallotMeasure, PersonCandidate, BallotOptionCandidate, CountyResult
 
 class ConsoleFormatter:
     """Formats election data for display or file output."""
@@ -108,7 +108,7 @@ class CSVFormatter:
 
     @classmethod
     def write_results(cls, categorized_races: Dict[str, List[Union[ElectionRace, BallotMeasure]]], 
-                     data_dir: str = "data") -> None:
+                     timestamp: datetime, data_dir: str = "data") -> None:
         """Write race data to separate CSV files by type."""
         os.makedirs(data_dir, exist_ok=True)
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -219,4 +219,89 @@ class CSVFormatter:
             writer = csv.DictWriter(f, fieldnames=headers)
             writer.writeheader()
             writer.writerows(rows)
-        print(f"Wrote {len(rows)} rows to {filename}")
+        #print(f"Wrote {len(rows)} rows to {filename}")
+
+class DetailedFormatter:
+    """Formatter for detailed county-level results."""
+    
+    PERSON_RACE_HEADERS = [
+        'race_id', 'state_postal', 'county_name', 'county_fips', 'county_id',
+        'precincts_reporting', 'precincts_total', 'precincts_reporting_pct',
+        'expected_vote_pct', 'total_votes', 'registered_voters', 'last_updated',
+        'candidate_id', 'first_name', 'last_name', 'party', 'vote_count', 'vote_pct'
+    ]
+    
+    BALLOT_HEADERS = [
+        'race_id', 'state_postal', 'county_name', 'county_fips', 'county_id',
+        'precincts_reporting', 'precincts_total', 'precincts_reporting_pct',
+        'expected_vote_pct', 'total_votes', 'registered_voters', 'last_updated',
+        'candidate_id', 'option_name', 'vote_count', 'vote_pct'
+    ]
+
+    @classmethod
+    def write_detailed_results(cls, race_type: str, race_id: str, 
+                             county_results: List[CountyResult],
+                             candidate_meta: dict, timestamp: datetime, data_dir: str = "data") -> None:
+        """Write detailed results to CSV."""
+        person_rows = []
+        ballot_rows = []
+        
+        for county_result in county_results:
+            # Create base row with county info
+            base_row = {
+                'race_id': race_id,
+                'state_postal': county_result.state_postal,
+                'county_name': county_result.county_name,
+                'county_fips': county_result.county_fips,
+                'county_id': county_result.county_id,
+                'precincts_reporting': county_result.precincts_reporting,
+                'precincts_total': county_result.precincts_total,
+                'precincts_reporting_pct': county_result.precincts_reporting_pct,
+                'expected_vote_pct': county_result.expected_vote_pct,
+                'total_votes': county_result.total_votes,
+                'registered_voters': county_result.registered_voters,
+                'last_updated': county_result.last_updated.isoformat()
+            }
+            
+            # Add a row for each candidate
+            for cand_id, vote_data in county_result.candidate_votes.items():
+                row = base_row.copy()
+                if cand_id in candidate_meta:
+                    cand = candidate_meta[cand_id]
+                    if 'first' in cand:  # Person candidate
+                        row.update({
+                            'candidate_id': cand_id,
+                            'first_name': cand['first'],
+                            'last_name': cand['last'],
+                            'party': cand['party'],
+                            'vote_count': vote_data['votes'],
+                            'vote_pct': vote_data['pct']
+                        })
+                        person_rows.append(row)
+                    else:  # Ballot option
+                        row.update({
+                            'candidate_id': cand_id,
+                            'option_name': cand['last'],
+                            'vote_count': vote_data['votes'],
+                            'vote_pct': vote_data['pct']
+                        })
+                        ballot_rows.append(row)
+
+        # Write the appropriate type of rows
+        if race_type == 'ballot':
+            if ballot_rows:
+                filename = os.path.join(data_dir, f'{race_type}_{timestamp}_detailed.csv')
+                cls.write_csv(filename, cls.BALLOT_HEADERS, ballot_rows)
+        else:
+            if person_rows:
+                filename = os.path.join(data_dir, f'{race_type}_{timestamp}_detailed.csv')
+                cls.write_csv(filename, cls.PERSON_RACE_HEADERS, person_rows)
+
+    @staticmethod
+    def write_csv(filename: str, headers: List[str], rows: List[dict]) -> None:
+        """Write data to CSV file."""
+        with open(filename, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=headers)
+            writer.writeheader()
+            writer.writerows(rows)
+        #print(f"Wrote {len(rows)} detailed results to {filename}")

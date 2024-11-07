@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Optional, Dict
 from datetime import datetime
 
 @dataclass
@@ -73,3 +73,19 @@ class BallotMeasure:
     designation: str
     candidates: List[BallotOptionCandidate]
     key_race: bool = False
+
+@dataclass
+class CountyResult:
+    """Represents county-level election results."""
+    state_postal: str
+    county_name: str
+    county_fips: str
+    county_id: str
+    precincts_reporting: int
+    precincts_total: int
+    precincts_reporting_pct: float
+    expected_vote_pct: float
+    total_votes: int
+    registered_voters: int
+    last_updated: datetime
+    candidate_votes: Dict[str, Dict[str, float]] 

@@ -1,8 +1,9 @@
-from typing import Dict, List, Union
+from typing import Dict, List, Union, Optional
 from datetime import datetime
 from collections import defaultdict
+import requests
 
-from models import PersonCandidate, BallotOptionCandidate, ElectionRace, BallotMeasure
+from models import PersonCandidate, BallotOptionCandidate, ElectionRace, BallotMeasure, CountyResult
 
 class ElectionDataParser:
     """Parser that combines progress and metadata information."""
@@ -160,3 +161,72 @@ class ElectionDataParser:
                     categories['Other'].append(race)
         
         return categories
+    
+class DetailedDataParser:
+    """Parser for county-level election data."""
+    
+    def __init__(self, base_url: str):
+        self.base_url = base_url
+        self.session = requests.Session()
+
+    def fetch_detailed_data(self, state: str, race_id: str) -> Optional[dict]:
+        """Fetch detailed data for a specific race."""
+        url = f"{self.base_url}/results/races/{state}/{race_id}/detail.json"
+        try:
+            response = self.session.get(url)
+            response.raise_for_status()
+            return response.json()
+        except Exception as e:
+            print(f"Error fetching detailed data for {state}/{race_id}: {e}")
+            return None
+
+    def parse_county_result(self, county_data: dict) -> CountyResult:
+        """Parse county-level result data."""
+        candidate_votes = {
+            c['candidateID']: {
+                'votes': c['voteCount'],
+                'pct': c['votePct']
+            }
+            for c in county_data['candidates']
+        }
+
+        if 'reportingunitName' not in county_data:
+            county_data['reportingunitName'] = "NA"
+        if 'fipsCode' not in county_data:
+            county_data['fipsCode'] = "NA"
+        if 'reportingunitID' not in county_data:
+            county_data['reportingunitID'] = "NA"
+        # Calculate total votes (handle both county-level and national results)
+        if 'parameters' in county_data and 'vote' in county_data['parameters']:
+            total_votes = county_data['parameters']['vote'].get('total', 0)
+            registered_voters = county_data['parameters']['vote'].get('registered', 0)
+        else:
+            # For national results, sum the vote counts
+            total_votes = sum(c['voteCount'] for c in county_data['candidates'])
+            registered_voters = 0  # National registered voter count not provided
+            
+        return CountyResult(
+            state_postal=county_data['statePostal'],
+            county_name=county_data['reportingunitName'],
+            county_fips=county_data['fipsCode'],
+            county_id=county_data['reportingunitID'],
+            precincts_reporting=county_data['precinctsReporting'],
+            precincts_total=county_data['precinctsTotal'],
+            precincts_reporting_pct=county_data['precinctsReportingPct'],
+            expected_vote_pct=county_data.get('eevp', 0),
+            total_votes=total_votes,
+            registered_voters=registered_voters,
+            last_updated=datetime.fromisoformat(county_data['lastUpdated']),
+            candidate_votes=candidate_votes
+        )
+
+    def get_detailed_results(self, race_id: str, state: str) -> List[CountyResult]:
+        """Get all county results for a race."""
+        detailed_data = self.fetch_detailed_data(state, race_id)
+        if not detailed_data:
+            return []
+            
+        return [
+            self.parse_county_result(county_data)
+            for county_data in detailed_data.values()
+        ]
