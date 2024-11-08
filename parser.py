@@ -182,7 +182,7 @@ class ElectionDataParser:
                 # Handle potentially missing or different office IDs
                 office_id = getattr(race, 'office_id', '').upper()
                 if office_id == 'P':
-                    categories['Presidential'].append(race)
+                    categories['President'].append(race)
                 elif office_id == 'S':
                     categories['Senate'].append(race)
                 elif office_id == 'H':

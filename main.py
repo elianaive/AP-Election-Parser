@@ -12,26 +12,26 @@ ELECTION_DAYS = {
     2024: {"date": "2024-11-05", "types": ["president", "senate", "governor", "house", "ballot"]},
     2020: {"date": "2020-11-03", "types": ["president", "senate", "governor", "house", "ballot"]},
     2016: {"date": "2016-11-08", "types": ["president", "senate", "governor", "house", "ballot"]},
-    2012: {"date": "2012-11-06", "types": ["president", "senate", "governor", "house", "ballot"]},
-    2008: {"date": "2008-11-04", "types": ["president", "senate", "governor", "house", "ballot"]},
-    2004: {"date": "2004-11-02", "types": ["president", "senate", "governor", "house", "ballot"]},
-    2000: {"date": "2000-11-07", "types": ["president", "senate", "governor", "house", "ballot"]},
+    #2012: {"date": "2012-11-06", "types": ["president", "senate", "governor", "house", "ballot"]},
+    #2008: {"date": "2008-11-04", "types": ["president", "senate", "governor", "house", "ballot"]},
+    #2004: {"date": "2004-11-02", "types": ["president", "senate", "governor", "house", "ballot"]},
+    #2000: {"date": "2000-11-07", "types": ["president", "senate", "governor", "house", "ballot"]},
     
     # Midterm election years
     2022: {"date": "2022-11-08", "types": ["senate", "governor", "house", "ballot"]},
     2018: {"date": "2018-11-06", "types": ["senate", "governor", "house", "ballot"]},
     2014: {"date": "2014-11-04", "types": ["senate", "governor", "house", "ballot"]},
-    2010: {"date": "2010-11-02", "types": ["senate", "governor", "house", "ballot"]},
-    2006: {"date": "2006-11-07", "types": ["senate", "governor", "house", "ballot"]},
-    2002: {"date": "2002-11-05", "types": ["senate", "governor", "house", "ballot"]},
-    1998: {"date": "1998-11-03", "types": ["senate", "governor", "house", "ballot"]},
+    #2010: {"date": "2010-11-02", "types": ["senate", "governor", "house", "ballot"]},
+    #2006: {"date": "2006-11-07", "types": ["senate", "governor", "house", "ballot"]},
+    #2002: {"date": "2002-11-05", "types": ["senate", "governor", "house", "ballot"]},
+    #1998: {"date": "1998-11-03", "types": ["senate", "governor", "house", "ballot"]},
 }
 
 def get_base_url(year, date):
     """Construct the base URL for the given election year."""
     if year >= 2024:
         return f"https://interactives.apelections.org/election-results/data-live/{date}"
-    elif year >= 2018:
+    elif year >= 2014:
         return f"https://interactives.ap.org/election-results/data-live/{date}"
     else:
         raise ValueError("Data for years before 2018 is not accessible with this URL pattern.")
@@ -154,7 +154,7 @@ def main():
             detailed_parser = DetailedDataParser(base_url)
 
             race_types = [
-                ('president', filtered_races.get('Presidential', [])),
+                ('president', filtered_races.get('President', [])),
                 ('senate', filtered_races.get('Senate', [])),
                 ('governor', filtered_races.get('Governor', [])),
                 ('ballot', filtered_races.get('Ballot Measures', []))
