@@ -1,0 +1,99 @@
+race_id,state_postal,state_name,description,category,summary,race_call_status,last_updated,precincts_reporting,precincts_total,precincts_reporting_pct,expected_vote_pct,total_votes,candidate_id,option_name,vote_count,vote_pct
+20201103AK3136,AK,Alaska,Pri top four go to GE,Uncategorized,,Unknown,2020-12-01T01:26:14.747000+00:00,442,442,100,0,0,7115,Yes,174032,50.55
+20201103AK3136,AK,Alaska,Pri top four go to GE,Uncategorized,,Unknown,2020-12-01T01:26:14.747000+00:00,442,442,100,0,0,7114,No,170251,49.45
+20201103AL2081,AL,Alabama,"Specify ""only a citizen""",Uncategorized,,Unknown,2020-11-23T21:10:15.800000+00:00,2281,2281,100,0,0,5858,Yes,1527408,77.02
+20201103AL2081,AL,Alabama,"Specify ""only a citizen""",Uncategorized,,Unknown,2020-11-23T21:10:15.800000+00:00,2281,2281,100,0,0,5857,No,455797,22.98
+20201103AR6781,AR,Arkansas,For state legislators,Uncategorized,,Unknown,2020-11-27T18:54:00.913000+00:00,2575,2575,100,0,0,13810,For,647861,55.38
+20201103AR6781,AR,Arkansas,For state legislators,Uncategorized,,Unknown,2020-11-27T18:54:00.913000+00:00,2575,2575,100,0,0,13811,Against,521979,44.62
+20201103AZ4223,AZ,Arizona,Regulate and tax,Uncategorized,,Unknown,2020-11-30T22:46:49.003000+00:00,1489,1489,100,0,0,10395,Yes,1956440,60.03
+20201103AZ4223,AZ,Arizona,Regulate and tax,Uncategorized,,Unknown,2020-11-30T22:46:49.003000+00:00,1489,1489,100,0,0,10396,No,1302458,39.97
+20201103CA8794,CA,California,In government policies,Uncategorized,,Unknown,2020-12-12T16:26:03.987000+00:00,20499,20499,100,0,0,22556,No,9655595,57.23
+20201103CA8794,CA,California,In government policies,Uncategorized,,Unknown,2020-12-12T16:26:03.987000+00:00,20499,20499,100,0,0,22555,Yes,7217064,42.77
+20201103CA8799,CA,California,Provide other benefits,Uncategorized,,Unknown,2020-12-12T16:26:03.987000+00:00,20268,20499,98.87,0,0,22565,Yes,9957858,58.63
+20201103CA8799,CA,California,Provide other benefits,Uncategorized,,Unknown,2020-12-12T16:26:03.987000+00:00,20268,20499,98.87,0,0,22566,No,7027467,41.37
+20201103CO7695,CO,Colorado,Slightly revise,Uncategorized,,Unknown,2020-12-04T19:12:09.543000+00:00,3276,3276,100,0,0,13757,Yes,1985239,62.9
+20201103CO7695,CO,Colorado,Slightly revise,Uncategorized,,Unknown,2020-12-04T19:12:09.543000+00:00,3276,3276,100,0,0,13756,No,1171137,37.1
+20201103CO7698,CO,Colorado,Join Interstate Compact,Uncategorized,,Unknown,2020-12-04T19:12:09.543000+00:00,3276,3276,100,0,0,13763,Yes,1644716,52.33
+20201103CO7698,CO,Colorado,Join Interstate Compact,Uncategorized,,Unknown,2020-12-04T19:12:09.543000+00:00,3276,3276,100,0,0,13762,No,1498500,47.67
+20201103CO7700,CO,Colorado,Exempt medical need,Uncategorized,,Unknown,2020-12-04T19:12:09.543000+00:00,3276,3276,100,0,0,13766,No,1859479,58.99
+20201103CO7700,CO,Colorado,Exempt medical need,Uncategorized,,Unknown,2020-12-04T19:12:09.543000+00:00,3276,3276,100,0,0,13767,Yes,1292787,41.01
+20201103DC9344,DC,District of Columbia,Lowest police priority,Uncategorized,,Unknown,2020-12-02T17:58:32.683000+00:00,143,143,100,0,0,10433,For,214685,76.18
+20201103DC9344,DC,District of Columbia,Lowest police priority,Uncategorized,,Unknown,2020-12-02T17:58:32.683000+00:00,143,143,100,0,0,10434,Against,67140,23.82
+20201103FL12103,FL,Florida,"Specify ""Only a citizen""",Uncategorized,,Unknown,2020-11-17T16:51:52.197000+00:00,6097,6097,100,0,0,22946,Yes,8307109,79.29
+20201103FL12103,FL,Florida,"Specify ""Only a citizen""",Uncategorized,,Unknown,2020-11-17T16:51:52.197000+00:00,6097,6097,100,0,0,22945,No,2169684,20.71
+20201103FL12104,FL,Florida,Fifteen dollars by 2026,Uncategorized,,Unknown,2020-11-17T16:51:52.197000+00:00,6097,6097,100,0,0,22947,Yes,6391753,60.82
+20201103FL12104,FL,Florida,Fifteen dollars by 2026,Uncategorized,,Unknown,2020-11-17T16:51:52.197000+00:00,6097,6097,100,0,0,22948,No,4117815,39.18
+20201103FL12105,FL,Florida,for State Offices,Uncategorized,,Unknown,2020-11-17T16:51:52.197000+00:00,6097,6097,100,0,0,22949,Yes,5854468,57.03
+20201103FL12105,FL,Florida,for State Offices,Uncategorized,,Unknown,2020-11-17T16:51:52.197000+00:00,6097,6097,100,0,0,22950,No,4410768,42.97
+20201103GA12594,GA,Georgia,Allow state to be sued,Uncategorized,,Unknown,2020-12-07T20:18:20.480000+00:00,2656,2656,100,0,0,22262,Yes,3491296,74.46
+20201103GA12594,GA,Georgia,Allow state to be sued,Uncategorized,,Unknown,2020-12-07T20:18:20.480000+00:00,2656,2656,100,0,0,22263,No,1197792,25.54
+20201103IA17299,IA,Iowa,To propose amendments,Uncategorized,,Unknown,2021-01-11T14:34:02.273000+00:00,1661,1661,100,0,0,23544,No,972930,70.42
+20201103IA17299,IA,Iowa,To propose amendments,Uncategorized,,Unknown,2021-01-11T14:34:02.273000+00:00,1661,1661,100,0,0,23543,Yes,408746,29.58
+20201103IL16511,IL,Illinois,Allow graduated tax,Uncategorized,,Unknown,2020-12-06T02:36:36.657000+00:00,10398,10455,99.45,0,0,28901,No,3040506,53.26
+20201103IL16511,IL,Illinois,Allow graduated tax,Uncategorized,,Unknown,2020-12-06T02:36:36.657000+00:00,10398,10455,99.45,0,0,28902,Yes,2668773,46.74
+20201103KY18864,KY,Kentucky,Marsy's Law,Uncategorized,,Unknown,2020-11-21T00:08:09.290000+00:00,3685,3685,100,0,0,6371,Yes,1156653,63.37
+20201103KY18864,KY,Kentucky,Marsy's Law,Uncategorized,,Unknown,2020-11-21T00:08:09.290000+00:00,3685,3685,100,0,0,6372,No,668718,36.63
+20201103LA20480,LA,Louisiana,No requirement to fund,Uncategorized,,Unknown,2020-11-18T19:02:01.103000+00:00,3934,3934,100,0,0,25170,Yes,1274167,62.06
+20201103LA20480,LA,Louisiana,No requirement to fund,Uncategorized,,Unknown,2020-11-18T19:02:01.103000+00:00,3934,3934,100,0,0,25171,No,779005,37.94
+20201103MA24901,MA,Massachusetts,For primary and GE,Uncategorized,,Unknown,2020-12-03T14:39:38.170000+00:00,2173,2173,100,0,0,35144,No,1875712,54.77
+20201103MA24901,MA,Massachusetts,For primary and GE,Uncategorized,,Unknown,2020-12-03T14:39:38.170000+00:00,2173,2173,100,0,0,35145,Yes,1548992,45.23
+20201103MD22872,MD,Maryland,Authorize sports betting,Uncategorized,,Unknown,2020-12-07T15:44:04.643000+00:00,1991,1991,100,0,0,31854,For,1904098,67.07
+20201103MD22872,MD,Maryland,Authorize sports betting,Uncategorized,,Unknown,2020-12-07T15:44:04.643000+00:00,1991,1991,100,0,0,31855,Against,934950,32.93
+20201103MI24615,MI,Michigan,Constitutional Amendment,Uncategorized,,Unknown,2020-11-23T23:27:27.853000+00:00,4814,4814,100,0,0,37163,Yes,4472671,88.75
+20201103MI24615,MI,Michigan,Constitutional Amendment,Uncategorized,,Unknown,2020-11-23T23:27:27.853000+00:00,4814,4814,100,0,0,37164,No,567130,11.25
+20201103MO27537,MO,Missouri,"LtGov, SOS, Aud & AttGen",Uncategorized,,Unknown,2020-12-08T21:30:13.330000+00:00,3692,3692,100,0,0,10592,No,1527770,52.84
+20201103MO27537,MO,Missouri,"LtGov, SOS, Aud & AttGen",Uncategorized,,Unknown,2020-12-08T21:30:13.330000+00:00,3692,3692,100,0,0,10591,Yes,1363754,47.16
+20201103MO27538,MO,Missouri,Limit special interests,Uncategorized,,Unknown,2020-12-08T21:30:13.330000+00:00,3692,3692,100,0,0,10593,Yes,1489502,51.01
+20201103MO27538,MO,Missouri,Limit special interests,Uncategorized,,Unknown,2020-12-08T21:30:13.330000+00:00,3692,3692,100,0,0,10594,No,1430358,48.99
+20201103MS27229,MS,Mississippi,Approve pictured design,Uncategorized,,Unknown,2020-12-04T22:42:41.963000+00:00,1768,1768,100,0,0,32642,Yes,927942,72.92
+20201103MS27229,MS,Mississippi,Approve pictured design,Uncategorized,,Unknown,2020-12-04T22:42:41.963000+00:00,1768,1768,100,0,0,32643,No,344621,27.08
+20201103MS27231,MS,Mississippi,Either Measure 65 or 65A,Uncategorized,,Unknown,2020-12-04T22:42:42.897000+00:00,1768,1768,100,0,0,32644,For Either,803716,68.61
+20201103MS27231,MS,Mississippi,Either Measure 65 or 65A,Uncategorized,,Unknown,2020-12-04T22:42:42.897000+00:00,1768,1768,100,0,0,32655,Against Both,367660,31.39
+20201103MS27232,MS,Mississippi,Vote for one measure,Uncategorized,,Unknown,2020-12-04T22:42:43.057000+00:00,1768,1768,100,0,0,32647,Initiative 65,755591,73.65
+20201103MS27232,MS,Mississippi,Vote for one measure,Uncategorized,,Unknown,2020-12-04T22:42:43.057000+00:00,1768,1768,100,0,0,32648,Alternative 65A,270296,26.35
+20201103MT28524,MT,Montana,To be set by law,Uncategorized,,Unknown,2020-12-01T01:55:32.967000+00:00,663,663,100,0,0,35844,Yes,340847,57.84
+20201103MT28524,MT,Montana,To be set by law,Uncategorized,,Unknown,2020-12-01T01:55:32.967000+00:00,663,663,100,0,0,35843,No,248442,42.16
+20201103MT28525,MT,Montana,End local govt authority,Uncategorized,,Unknown,2020-12-01T01:55:32.967000+00:00,663,663,100,0,0,35845,Yes,298388,50.96
+20201103MT28525,MT,Montana,End local govt authority,Uncategorized,,Unknown,2020-12-01T01:55:32.967000+00:00,663,663,100,0,0,35846,No,287129,49.04
+20201103MT28526,MT,Montana,"License, regulate, tax",Uncategorized,,Unknown,2020-12-01T01:55:32.967000+00:00,663,663,100,0,0,35848,Yes,341037,56.9
+20201103MT28526,MT,Montana,"License, regulate, tax",Uncategorized,,Unknown,2020-12-01T01:55:32.967000+00:00,663,663,100,0,0,35847,No,258337,43.1
+20201103ND35905,ND,North Dakota,Submit to legislature,Uncategorized,,Unknown,2020-11-17T16:51:52.977000+00:00,422,422,100,0,0,41112,No,201343,61.61
+20201103ND35905,ND,North Dakota,Submit to legislature,Uncategorized,,Unknown,2020-11-17T16:51:52.977000+00:00,422,422,100,0,0,41111,Yes,125460,38.39
+20201103NE29419,NE,Nebraska,Ban as crime punishment,Uncategorized,,Unknown,2020-12-04T19:45:38.980000+00:00,1379,1379,100,0,0,31872,For,603204,68.23
+20201103NE29419,NE,Nebraska,Ban as crime punishment,Uncategorized,,Unknown,2020-12-04T19:45:38.980000+00:00,1379,1379,100,0,0,31873,Against,280898,31.77
+20201103NE29422,NE,Nebraska,Constitutional Amendment,Uncategorized,,Unknown,2020-12-04T19:45:39.147000+00:00,1379,1379,100,0,0,31879,For,588405,65.04
+20201103NE29422,NE,Nebraska,Constitutional Amendment,Uncategorized,,Unknown,2020-12-04T19:45:39.147000+00:00,1379,1379,100,0,0,31878,Against,316298,34.96
+20201103NE29423,NE,Nebraska,Requires I-429 to pass,Uncategorized,,Unknown,2020-12-04T19:45:39.303000+00:00,1379,1379,100,0,0,31886,For,591086,65.01
+20201103NE29423,NE,Nebraska,Requires I-429 to pass,Uncategorized,,Unknown,2020-12-04T19:45:39.303000+00:00,1379,1379,100,0,0,31887,Against,318094,34.99
+20201103NE29425,NE,Nebraska,Requires I-429 to pass,Uncategorized,,Unknown,2020-12-04T19:45:39.503000+00:00,1379,1379,100,0,0,31885,For,620835,68.71
+20201103NE29425,NE,Nebraska,Requires I-429 to pass,Uncategorized,,Unknown,2020-12-04T19:45:39.503000+00:00,1379,1379,100,0,0,31884,Against,282703,31.29
+20201103NJ31679,NJ,New Jersey,Constitutional Amendment,Uncategorized,,Unknown,2021-02-23T16:16:30.647000+00:00,6348,6348,100,0,0,39608,Yes,2737746,67.08
+20201103NJ31679,NJ,New Jersey,Constitutional Amendment,Uncategorized,,Unknown,2021-02-23T16:16:30.647000+00:00,6348,6348,100,0,0,39609,No,1343637,32.92
+20201103NM34036,NM,New Mexico,For non-statewide office,Uncategorized,,Unknown,2020-11-25T03:49:07.117000+00:00,1925,1925,100,0,0,39110,Yes,503308,64.44
+20201103NM34036,NM,New Mexico,For non-statewide office,Uncategorized,,Unknown,2020-11-25T03:49:07.117000+00:00,1925,1925,100,0,0,39109,No,277744,35.56
+20201103NM34037,NM,New Mexico,"Improve, create, equip",Uncategorized,,Unknown,2020-11-25T03:49:10.270000+00:00,1925,1925,100,0,0,39120,Yes,550541,68.1
+20201103NM34037,NM,New Mexico,"Improve, create, equip",Uncategorized,,Unknown,2020-11-25T03:49:10.270000+00:00,1925,1925,100,0,0,39119,No,257888,31.9
+20201103NV31146,NV,Nevada,Constitutional Amendment,Uncategorized,,Unknown,2020-11-27T19:24:49.883000+00:00,1993,1993,100,0,0,37520,Yes,821050,62.43
+20201103NV31146,NV,Nevada,Constitutional Amendment,Uncategorized,,Unknown,2020-11-27T19:24:49.883000+00:00,1993,1993,100,0,0,37519,No,494186,37.57
+20201103NV31147,NV,Nevada,Constitutional Amendment,Uncategorized,,Unknown,2020-11-27T19:24:50.060000+00:00,1993,1993,100,0,0,37521,Yes,826719,64.12
+20201103NV31147,NV,Nevada,Constitutional Amendment,Uncategorized,,Unknown,2020-11-27T19:24:50.060000+00:00,1993,1993,100,0,0,37522,No,462544,35.88
+20201103OK38616,OK,Oklahoma,Exempt criminal history,Uncategorized,,Unknown,2020-11-17T16:51:57.870000+00:00,1948,1948,100,0,0,46418,No,923328,61.08
+20201103OK38616,OK,Oklahoma,Exempt criminal history,Uncategorized,,Unknown,2020-11-17T16:51:57.870000+00:00,1948,1948,100,0,0,46417,Yes,588280,38.92
+20201103OR39139,OR,Oregon,Allow reform laws,Uncategorized,,Unknown,2020-12-04T21:54:38.520000+00:00,1316,1333,98.72,0,0,6057,Yes,1763276,78.31
+20201103OR39139,OR,Oregon,Allow reform laws,Uncategorized,,Unknown,2020-12-04T21:54:38.520000+00:00,1316,1333,98.72,0,0,6058,No,488413,21.69
+20201103OR39141,OR,Oregon,"License, regulate, tax",Uncategorized,,Unknown,2020-12-04T21:54:41.740000+00:00,1333,1333,100,0,0,6061,Yes,1270057,55.75
+20201103OR39141,OR,Oregon,"License, regulate, tax",Uncategorized,,Unknown,2020-12-04T21:54:41.740000+00:00,1333,1333,100,0,0,6062,No,1008199,44.25
+20201103OR39142,OR,Oregon,Fund with marijuana tax,Uncategorized,,Unknown,2020-12-04T21:54:40.580000+00:00,1333,1333,100,0,0,6063,Yes,1333268,58.46
+20201103OR39142,OR,Oregon,Fund with marijuana tax,Uncategorized,,Unknown,2020-12-04T21:54:40.580000+00:00,1333,1333,100,0,0,6064,No,947313,41.54
+20201103RI41182,RI,Rhode Island,Remove Prov. Plantations,Uncategorized,,Unknown,2020-11-30T18:59:51.917000+00:00,460,460,100,0,0,46731,Approve,247261,53.12
+20201103RI41182,RI,Rhode Island,Remove Prov. Plantations,Uncategorized,,Unknown,2020-11-30T18:59:51.917000+00:00,460,460,100,0,0,46732,Reject,218175,46.88
+20201103SD42577,SD,South Dakota,Create state-run program,Uncategorized,,Unknown,2020-11-17T16:51:55.973000+00:00,693,693,100,0,0,48467,Yes,291750,69.92
+20201103SD42577,SD,South Dakota,Create state-run program,Uncategorized,,Unknown,2020-11-17T16:51:55.973000+00:00,693,693,100,0,0,48468,No,125484,30.08
+20201103SD42578,SD,South Dakota,Require passage of laws,Uncategorized,,Unknown,2020-11-17T16:51:55.973000+00:00,693,693,100,0,0,48469,Yes,225260,54.18
+20201103SD42578,SD,South Dakota,Require passage of laws,Uncategorized,,Unknown,2020-11-17T16:51:55.973000+00:00,693,693,100,0,0,48470,No,190477,45.82
+20201103UT49751,UT,Utah,Ban as crime punishment,Uncategorized,,Unknown,2020-11-24T19:59:49.223000+00:00,2619,2619,100,0,0,56086,For,1138974,80.48
+20201103UT49751,UT,Utah,Ban as crime punishment,Uncategorized,,Unknown,2020-11-24T19:59:49.223000+00:00,2619,2619,100,0,0,56085,Against,276171,19.52
+20201103UT49753,UT,Utah,Use for wildlife control,Uncategorized,,Unknown,2020-11-24T19:59:49.393000+00:00,2619,2619,100,0,0,56089,For,1063212,74.92
+20201103UT49753,UT,Utah,Use for wildlife control,Uncategorized,,Unknown,2020-11-24T19:59:49.393000+00:00,2619,2619,100,0,0,56090,Against,355848,25.08
+20201103VA48006,VA,Virginia,"Of legislators, citizens",Uncategorized,,Unknown,2020-11-24T17:58:15.093000+00:00,2585,2585,100,0,0,51822,Yes,2770704,65.69
+20201103VA48006,VA,Virginia,"Of legislators, citizens",Uncategorized,,Unknown,2020-11-24T17:58:15.093000+00:00,2585,2585,100,0,0,51823,No,1447390,34.31

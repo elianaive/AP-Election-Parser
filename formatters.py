@@ -107,11 +107,19 @@ class CSVFormatter:
     ]
 
     @classmethod
-    def write_results(cls, categorized_races: Dict[str, List[Union[ElectionRace, BallotMeasure]]], 
-                     timestamp: datetime, data_dir: str = "data") -> None:
+    def write_results(cls, categorized_races: Dict[str, List[Union[ElectionRace, BallotMeasure]]], data_dir: str = "data") -> None:
         """Write race data to separate CSV files by type."""
         os.makedirs(data_dir, exist_ok=True)
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+
+        # Extract year from first race ID (format: YYYYMMDD...)
+        year = None
+        for races in categorized_races.values():
+            if races:
+                year = races[0].race_id[:4]
+                break
+        
+        if not year:
+            raise ValueError("No races found to determine year")
         
         # Initialize row collections
         presidential_rows = []
@@ -193,23 +201,23 @@ class CSVFormatter:
         
         # Write files
         if presidential_rows:
-            filename = os.path.join(data_dir, f'president_{timestamp}.csv')
+            filename = os.path.join(data_dir, f'president_{year}.csv')
             cls.write_csv(filename, cls.PRESIDENT_HEADERS, presidential_rows)
             
         if senate_rows:
-            filename = os.path.join(data_dir, f'senate_{timestamp}.csv')
+            filename = os.path.join(data_dir, f'senate_{year}.csv')
             cls.write_csv(filename, cls.CONGRESS_HEADERS, senate_rows)
             
         if house_rows:
-            filename = os.path.join(data_dir, f'house_{timestamp}.csv')
+            filename = os.path.join(data_dir, f'house_{year}.csv')
             cls.write_csv(filename, cls.CONGRESS_HEADERS, house_rows)
             
         if governor_rows:
-            filename = os.path.join(data_dir, f'governor_{timestamp}.csv')
+            filename = os.path.join(data_dir, f'governor_{year}.csv')
             cls.write_csv(filename, cls.GOVERNOR_HEADERS, governor_rows)
             
         if ballot_rows:
-            filename = os.path.join(data_dir, f'ballot_{timestamp}.csv')
+            filename = os.path.join(data_dir, f'ballot_{year}.csv')
             cls.write_csv(filename, cls.BALLOT_HEADERS, ballot_rows)
 
     @staticmethod
@@ -241,10 +249,12 @@ class DetailedFormatter:
     @classmethod
     def write_detailed_results(cls, race_type: str, race_id: str, 
                              county_results: List[CountyResult],
-                             candidate_meta: dict, timestamp: datetime, data_dir: str = "data") -> None:
+                             candidate_meta: dict, data_dir: str = "data") -> None:
         """Write detailed results to CSV."""
         os.makedirs(data_dir, exist_ok=True)
-        filename = os.path.join(data_dir, f'{race_type}_{timestamp}_detailed.csv')
+
+        year = race_id[:4]
+        filename = os.path.join(data_dir, f'{race_type}_detailed_{year}.csv')
         
         # Prepare rows for writing
         rows = []
@@ -301,4 +311,4 @@ class DetailedFormatter:
                 writer.writeheader()
                 print(f"Created new file: {filename}")
             writer.writerows(rows)
-            print(f"{'Appended' if file_exists else 'Wrote'} {len(rows)} rows for race {race_id} to {filename}")
+            #print(f"{'Appended' if file_exists else 'Wrote'} {len(rows)} rows for race {race_id} to {filename}")

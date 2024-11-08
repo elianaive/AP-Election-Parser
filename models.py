@@ -88,4 +88,4 @@ class CountyResult:
     total_votes: int
     registered_voters: int
     last_updated: datetime
-    candidate_votes: Dict[str, Dict[str, float]] 
+    candidate_votes: Dict[str, Dict[str, float]]

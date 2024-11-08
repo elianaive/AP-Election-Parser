@@ -46,12 +46,16 @@ class ElectionDataParser:
         cand_id = prog_data['candidateID']
         meta_cand = meta_data['candidates'][cand_id]
         
+        # Handle missing vote data
+        vote_count = prog_data.get('voteCount', 0)
+        vote_pct = prog_data.get('votePct', 0.0)
+        
         base_args = {
             'candidate_id': cand_id,
-            'party': meta_cand['party'],
-            'ballot_order': meta_cand['ballotOrder'],
-            'vote_count': prog_data['voteCount'],
-            'vote_pct': prog_data['votePct'],
+            'party': meta_cand.get('party', 'Unknown'),  # Handle missing party
+            'ballot_order': meta_cand.get('ballotOrder', 0),  # Handle missing ballot order
+            'vote_count': vote_count,
+            'vote_pct': vote_pct,
             'advance_total': prog_data.get('advanceTotal'),
             'color_index': prog_data.get('colorIndex')
         }
@@ -59,14 +63,14 @@ class ElectionDataParser:
         # Determine if this is a ballot option or person
         if 'first' in meta_cand:
             return PersonCandidate(
-                first_name=meta_cand['first'],
-                last_name=meta_cand['last'],
+                first_name=meta_cand.get('first', ''),  # Handle missing first name
+                last_name=meta_cand.get('last', ''),    # Handle missing last name
                 incumbent=meta_cand.get('incumbent', False),
                 **base_args
             )
         else:
             return BallotOptionCandidate(
-                option_name=meta_cand['last'],
+                option_name=meta_cand.get('last', ''),  # Handle missing option name
                 **base_args
             )
 
@@ -83,13 +87,13 @@ class ElectionDataParser:
             'state_postal': prog_data['statePostal'],
             'state_name': prog_data['stateName'],
             'race_type': meta_data['raceType'],
-            'race_call_status': meta_data['raceCallStatus'],
+            'race_call_status': meta_data.get('raceCallStatus', 'Unknown'),
             'office_name': meta_data['officeName'],
             'last_updated': datetime.fromisoformat(prog_data['lastUpdated']),
             'precincts_reporting': prog_data['precinctsReporting'],
             'precincts_total': prog_data['precinctsTotal'],
             'precincts_reporting_pct': prog_data['precinctsReportingPct'],
-            'expected_vote_pct': prog_data['eevp'],
+            'expected_vote_pct': prog_data.get('eevp', prog_data.get('expectedVotePct', 0)),
             'total_votes': total_votes,
             'registered_voters': registered_voters,
             'key_race': meta_data.get('keyRace', False)
@@ -101,14 +105,37 @@ class ElectionDataParser:
             for pc in prog_data['candidates']
         ]
         
-        # Determine if this is a ballot measure
-        if cls.is_ballot_measure(meta_data):
+        # First check if it's a ballot measure
+        is_ballot = cls.is_ballot_measure(meta_data)
+        
+        if is_ballot:
+            print(f"Found ballot measure: {race_id} - {meta_data['officeName']}")
+            print(f"Candidates: {[c.candidate_id for c in candidates]}")
+            
+            # Convert any PersonCandidates to BallotOptionCandidates for ballot measures
+            ballot_options = []
+            for candidate in candidates:
+                if isinstance(candidate, PersonCandidate):
+                    # Convert to BallotOptionCandidate
+                    ballot_options.append(BallotOptionCandidate(
+                        candidate_id=candidate.candidate_id,
+                        party=candidate.party,
+                        ballot_order=candidate.ballot_order,
+                        vote_count=candidate.vote_count,
+                        vote_pct=candidate.vote_pct,
+                        option_name=f"{candidate.first_name} {candidate.last_name}".strip(),
+                        advance_total=candidate.advance_total,
+                        color_index=candidate.color_index
+                    ))
+                else:
+                    ballot_options.append(candidate)
+            
             return BallotMeasure(
                 description=meta_data.get('description', meta_data['officeName']),
                 category=meta_data.get('category', 'Uncategorized'),
                 summary=meta_data.get('summary', ''),
                 designation=meta_data.get('designation', ''),
-                candidates=candidates,
+                candidates=ballot_options,
                 **base_args
             )
         else:
@@ -135,7 +162,10 @@ class ElectionDataParser:
                         metadata[race_id]
                     )
                 except Exception as e:
-                    print(f"Error parsing race {race_id}: {e}")
+                    print(f"Error parsing race {race_id}: {str(e)}")
+                    # Log additional debug information
+                    print(f"Progress data keys: {progress_data[race_id].keys()}")
+                    print(f"Metadata keys: {metadata[race_id].keys()}")
                     continue
         
         return races
@@ -149,13 +179,15 @@ class ElectionDataParser:
             if isinstance(race, BallotMeasure):
                 categories['Ballot Measures'].append(race)
             else:
-                if race.office_id == 'P':
+                # Handle potentially missing or different office IDs
+                office_id = getattr(race, 'office_id', '').upper()
+                if office_id == 'P':
                     categories['Presidential'].append(race)
-                elif race.office_id == 'S':
+                elif office_id == 'S':
                     categories['Senate'].append(race)
-                elif race.office_id == 'H':
+                elif office_id == 'H':
                     categories['House'].append(race)
-                elif race.office_id == 'G':
+                elif office_id == 'G':
                     categories['Governor'].append(race)
                 else:
                     categories['Other'].append(race)
@@ -204,7 +236,7 @@ class DetailedDataParser:
             # For national results, sum the vote counts
             total_votes = sum(c['voteCount'] for c in county_data['candidates'])
             registered_voters = 0  # National registered voter count not provided
-            
+
         return CountyResult(
             state_postal=county_data['statePostal'],
             county_name=county_data['reportingunitName'],
@@ -213,7 +245,7 @@ class DetailedDataParser:
             precincts_reporting=county_data['precinctsReporting'],
             precincts_total=county_data['precinctsTotal'],
             precincts_reporting_pct=county_data['precinctsReportingPct'],
-            expected_vote_pct=county_data.get('eevp', 0),
+            expected_vote_pct=county_data.get('eevp', county_data.get('expectedVotePct', 0)),
             total_votes=total_votes,
             registered_voters=registered_voters,
             last_updated=datetime.fromisoformat(county_data['lastUpdated']),
